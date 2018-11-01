@@ -1,0 +1,39 @@
+diff --git a/config/samples/example_v1alpha1_boundeddeployment-2.yaml b/config/samples/example_v1alpha1_boundeddeployment-2.yaml
+new file mode 100644
+index 0000000..7336458
+--- /dev/null
++++ b/config/samples/example_v1alpha1_boundeddeployment-2.yaml
+@@ -0,0 +1,8 @@
++apiVersion: example.cncf.io/v1alpha1
++kind: BoundedDeployment
++metadata:
++  labels:
++    controller-tools.k8s.io: "1.0"
++  name: boundeddeployment-sample-2
++spec:
++  replicas: 10
+diff --git a/config/samples/example_v1alpha1_boundeddeployment-3.yaml b/config/samples/example_v1alpha1_boundeddeployment-3.yaml
+new file mode 100644
+index 0000000..c8a6062
+--- /dev/null
++++ b/config/samples/example_v1alpha1_boundeddeployment-3.yaml
+@@ -0,0 +1,8 @@
++apiVersion: example.cncf.io/v1alpha1
++kind: BoundedDeployment
++metadata:
++  labels:
++    controller-tools.k8s.io: "1.0"
++  name: boundeddeployment-sample-3
++spec:
++  replicas: foo
+diff --git a/config/samples/example_v1alpha1_boundeddeployment.yaml b/config/samples/example_v1alpha1_boundeddeployment.yaml
+index e9e4e0f..a341d2e 100644
+--- a/config/samples/example_v1alpha1_boundeddeployment.yaml
++++ b/config/samples/example_v1alpha1_boundeddeployment.yaml
+@@ -5,5 +5,4 @@ metadata:
+     controller-tools.k8s.io: "1.0"
+   name: boundeddeployment-sample
+ spec:
+-  # Add fields here
+-  foo: bar
++  replicas: 1
