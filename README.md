@@ -13,6 +13,9 @@
 
 `git clone` the repo under your `GOPATH`.
 
+Run `eval $(minikube docker-env)` after minikube starts.
+We will reuse the docker daemon in minikube.
+
 Run `./start_demo.sh`.
 
 ## What does It Do
@@ -42,11 +45,6 @@ Controller creates deployment with the same replicas specified in the CR.
 The mutating webhook modifies the CR.
 If the `replicas < 2`, it change it to 2.
 If the `replicas >3`, it change it to 3.
-
-### Verify CRD Validation Works
-
-1) Create a instance of CR with replicas=foo
-1) Verify it is rejected.
 
 ### Verify Controller and Webhook Work
 

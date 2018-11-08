@@ -62,5 +62,5 @@ pe "cat config/samples/example_v1alpha1_boundeddeployment-2.yaml | grep replicas
 pe "kubectl apply -f config/samples/example_v1alpha1_boundeddeployment-2.yaml"
 pe "kubectl get deployments boundeddeployment-sample-2-deployment -o yaml | grep replicas"
 
-pe "cat config/samples/example_v1alpha1_boundeddeployment-3.yaml | grep replicas"
-pe "kubectl apply -f config/samples/example_v1alpha1_boundeddeployment-3.yaml"
+# pe "cat config/samples/example_v1alpha1_boundeddeployment-3.yaml | grep replicas"
+# pe "kubectl apply -f config/samples/example_v1alpha1_boundeddeployment-3.yaml"
