@@ -33,9 +33,23 @@ RED="\033[0;31m"
 PURPLE="\033[0;35m"
 BROWN="\033[0;33m"
 WHITE="\033[1;37m"
+YELLOW="\033[1;33m"
 COLOR_RESET="\033[0m"
 
 C_NUM=0
+
+##
+# prompt information
+# takes param 1 as information
+# takes param 2 as color, no color if empty
+#
+function INFO {
+  color="$2"
+  reset=""
+  [[ "$color" != "" ]] && reset="$COLOR_RESET" 
+  echo ""
+  printf "${color}${1}${reset}\n"
+}
 
 ##
 # prints the script usage
@@ -67,13 +81,17 @@ function wait() {
 ##
 # print command only. Useful for when you want to pretend to run a command
 #
-# takes 1 param - the string command to print
+# takes param 1 - the string command to print
+# takes param 2 - the color for print, no color if not set
 #
 # usage: p "ls -l"
 #
 ##
 function p() {
   cmd=$1
+  color="$2"
+  reset=""
+  [[ "$color" != "" ]] && reset="$COLOR_RESET" 
 
   # render the prompt
   x=$(PS1="$DEMO_PROMPT" "$BASH" --norc -i </dev/null 2>&1 | sed -n '${s/^\(.*\)exit$/\1/p;}')
@@ -81,8 +99,8 @@ function p() {
   # show command number is selected
   if $SHOW_CMD_NUMS; then
    printf "[$((++C_NUM))] $x"
-  else
-   printf "$x"
+  else 
+   printf "${color}$x${reset}"
   fi
 
   # wait for the user to press a key before typing the command
@@ -91,9 +109,9 @@ function p() {
   fi
 
   if [[ -z $TYPE_SPEED ]]; then
-    echo -en "\033[0m$cmd"
+    echo -en "${color}$cmd${reset}"
   else
-    echo -en "\033[0m$cmd" | pv -qL $[$TYPE_SPEED+(-2 + RANDOM%5)];
+    echo -en "${color}$cmd${reset}" | pv -qL $[$TYPE_SPEED+(-2 + RANDOM%5)];
   fi
 
   # wait for the user to press a key before moving on
@@ -116,7 +134,7 @@ function pe() {
   p "$@"
 
   # execute the command
-  eval "$@"
+  eval "$1"
 }
 
 ##
