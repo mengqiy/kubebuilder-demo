@@ -17,6 +17,8 @@
 
 export PS1="$ "
 
+eval $(minikube docker-env)
+
 # This is your image name
 # TODO: setup local image registry for minikube. Push and pull from that registry.
 #IMG=gcr.io/mengqiy-dev/manager-demo
@@ -45,7 +47,7 @@ pe "make" "${GREEN}"
 
 INFO "====> [ commit generated code ]" "${YELLOW}"
 pe "git add -A" "${GREEN}"
-pe "git commit -m 'init commit'" "${GREEN}"
+pe "git commit -m 'kubebuilder scaffolded content'" "${GREEN}"
 
 INFO "====> [ add business logic ]" "${YELLOW}"
 pe "git apply demo/business_logic.patch" "${GREEN}"
@@ -73,10 +75,10 @@ INFO "====> [ Deploy the controller and webhook to cluster ]" "${YELLOW}"
 pe "make deploy" "${GREEN}"
 
 INFO "====> [ Verify the controller and webhooks work ]" "${YELLOW}"
-pe "cat config/samples/example_v1alpha1_boundeddeployment.yaml | grep replicas" "${GREEN}"
+pe "cat config/samples/example_v1alpha1_boundeddeployment.yaml" "${GREEN}"
 pe "kubectl apply -f config/samples/example_v1alpha1_boundeddeployment.yaml" "${GREEN}"
 pe "kubectl get deployments boundeddeployment-sample-deployment -o yaml | grep replicas" "${GREEN}"
 
-pe "cat config/samples/example_v1alpha1_boundeddeployment-2.yaml | grep replicas" "${GREEN}"
+pe "cat config/samples/example_v1alpha1_boundeddeployment-2.yaml" "${GREEN}"
 pe "kubectl apply -f config/samples/example_v1alpha1_boundeddeployment-2.yaml" "${GREEN}"
 pe "kubectl get deployments boundeddeployment-sample-2-deployment -o yaml | grep replicas" "${GREEN}"
