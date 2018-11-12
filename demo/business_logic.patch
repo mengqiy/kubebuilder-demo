@@ -56,20 +56,18 @@ index 91a4c5d..f1e95d4 100644
 -
  }
 diff --git a/pkg/webhook/default_server/boundeddeployments/mutating/boundeddeployments_create_update_handler.go b/pkg/webhook/default_server/boundeddeployments/mutating/boundeddeployments_create_update_handler.go
-index 4ea753d..99bdb78 100644
+index 4ea753d..9658795 100644
 --- a/pkg/webhook/default_server/boundeddeployments/mutating/boundeddeployments_create_update_handler.go
 +++ b/pkg/webhook/default_server/boundeddeployments/mutating/boundeddeployments_create_update_handler.go
-@@ -43,6 +43,14 @@ type BoundedDeploymentCreateUpdateHandler struct {
+@@ -43,6 +43,12 @@ type BoundedDeploymentCreateUpdateHandler struct {
  
  func (h *BoundedDeploymentCreateUpdateHandler) mutatingBoundedDeploymentFn(ctx context.Context, obj *examplev1alpha1.BoundedDeployment) error {
  	// TODO(user): implement your admission logic
 +	if obj.Spec.Replicas == nil {
 +		two := int32(2)
 +		obj.Spec.Replicas = &two
-+	} else if *obj.Spec.Replicas < 2 {
++	} else if *obj.Spec.Replicas > 2 {
 +		*obj.Spec.Replicas = 2
-+	} else if *obj.Spec.Replicas > 3 {
-+		*obj.Spec.Replicas = 3
 +	}
  	return nil
  }

@@ -48,6 +48,7 @@ pe "make" "${GREEN}"
 INFO "====> [ commit generated code ]" "${YELLOW}"
 pe "git add -A" "${GREEN}"
 pe "git commit -m 'kubebuilder scaffolded content'" "${GREEN}"
+pe "clear" "${GREEN}"
 
 INFO "====> [ add business logic ]" "${YELLOW}"
 pe "git apply demo/business_logic.patch" "${GREEN}"
@@ -70,15 +71,13 @@ pe "git apply demo/image_pull.patch" "${GREEN}"
 
 INFO "====> [ Build docker image ]" "${YELLOW}"
 pe "make docker-build" "${GREEN}"
+pe "clear" "${GREEN}"
 
 INFO "====> [ Deploy the controller and webhook to cluster ]" "${YELLOW}"
 pe "make deploy" "${GREEN}"
+pe "kubectl get crd" "${GREEN}"
 
 INFO "====> [ Verify the controller and webhooks work ]" "${YELLOW}"
 pe "cat config/samples/example_v1alpha1_boundeddeployment.yaml" "${GREEN}"
 pe "kubectl apply -f config/samples/example_v1alpha1_boundeddeployment.yaml" "${GREEN}"
 pe "kubectl get deployments boundeddeployment-sample-deployment -o yaml | grep replicas" "${GREEN}"
-
-pe "cat config/samples/example_v1alpha1_boundeddeployment-2.yaml" "${GREEN}"
-pe "kubectl apply -f config/samples/example_v1alpha1_boundeddeployment-2.yaml" "${GREEN}"
-pe "kubectl get deployments boundeddeployment-sample-2-deployment -o yaml | grep replicas" "${GREEN}"

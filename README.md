@@ -47,12 +47,10 @@ Controller creates deployment with the same replicas specified in the CR.
 ### Webhook
 
 The mutating webhook modifies the CR.
-If the `replicas < 2`, it change it to 2.
-If the `replicas >3`, it change it to 3.
+If the `replicas` field is not set, default it to 2.
+If the `replicas > 2`, it change it to 2.
 
 ### Verify Controller and Webhook Work
 
-1) Create a instance of CR with replicas=1
-1) Verify a deployment with replicas=2 has been created.
 1) Create a instance of CR with replicas=10
-1) Verify a deployment with replicas=3 has been created.
+1) Verify a deployment with replicas=2 has been created.
